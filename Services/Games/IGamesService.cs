@@ -10,4 +10,7 @@ public interface IGamesService
     bool DeleteGame(int gameId);
     GameDomain GetGame(int gameId);
     IEnumerable<GameDomain> GetAllGame();
+    bool CreateDeveloperToGame(DeveloperToGame devToGame);
+    bool CreateGenresToGame(GenresToGame genToGame);
+
 }

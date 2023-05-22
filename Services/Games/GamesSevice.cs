@@ -74,4 +74,20 @@ public class GamesSevice:IGamesService
         }
         return allinfogame;
     }
+
+    public bool CreateDeveloperToGame(DeveloperToGame devToGame)
+    {
+        if (_repository.CreateDeveloperToGame(devToGame))
+            return true;
+        else
+            return false;
+    }
+
+    public bool CreateGenresToGame(GenresToGame genToGame)
+    {
+        if (_repository.CreateGenresToGame(genToGame))
+            return true;
+        else
+            return false;
+    }
 }

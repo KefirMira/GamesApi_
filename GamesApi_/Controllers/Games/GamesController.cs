@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.Games.GameBlank;
 using Models.Games.GameDomain;
 using Models.Games.GameView;
 using Services.Games;
@@ -60,6 +61,24 @@ namespace GamesApi_.Controllers.Games
         public IActionResult Update([FromBody]GameDomain gameDomain)
         {
             if (_gameService.UpdateGame(gameDomain))
+                return Ok();
+            else
+                return NotFound();
+            
+        }
+        [HttpPost("createdevelopergame")]
+        public IActionResult CreateDeveloperGame([FromBody] DeveloperToGame developer)
+        {
+            if (_gameService.CreateDeveloperToGame(developer))
+                return Ok();
+            else
+                return NotFound();
+            
+        }
+        [HttpPost("createganregame")]
+        public IActionResult CreateGenreGame([FromBody] GenresToGame genre)
+        {
+            if (_gameService.CreateGenresToGame(genre))
                 return Ok();
             else
                 return NotFound();

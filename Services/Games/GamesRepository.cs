@@ -106,7 +106,39 @@ public class GamesRepository:IGamesRepository
             return false;
         }
     }
-    
+
+    public bool CreateDeveloperToGame(DeveloperToGame devToGame)
+    {
+        try
+        {
+            _connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand($"insert into game_developer( iddeveloper, idgame) values ({devToGame.IdDeveloper},{devToGame.IdGame})", _connection);
+            command.ExecuteNonQuery();
+            _connection.Close();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public bool CreateGenresToGame(GenresToGame genToGame)
+    {
+        try
+        {
+            _connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand($"insert into game_genres(idgenre, idgame) values ({genToGame.IdGenres},{genToGame.IdGame})", _connection);
+            command.ExecuteNonQuery();
+            _connection.Close();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public IEnumerable<GenreBlank> GetGenreGame(int gameId)
     {
         _connection.Open();

@@ -12,4 +12,6 @@ public interface IGamesRepository
     bool CreateGame(GameDomain gameDB);
     bool UpdateGame(GameDomain gameDB);
     bool DeleteGame(int gameId);
+    bool CreateDeveloperToGame(DeveloperToGame devToGame);
+    bool CreateGenresToGame(GenresToGame genToGame);
 }
