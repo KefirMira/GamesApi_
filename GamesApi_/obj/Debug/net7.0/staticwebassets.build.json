@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "JX6AVgkSkLvjOpwLL7fjY7y4JFu1H2mvMvihPwu1w0w=",
+  "Hash": "91Vx/yxE7QeYXfGO3BM79Yvfee9YV/+4t2j03pkwYpw=",
   "Source": "GamesApi_",
   "BasePath": "_content/GamesApi_",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "GamesApi_\\wwwroot",
+      "Source": "GamesApi_",
+      "ContentRoot": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\",
+      "BasePath": "_content/GamesApi_",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\header.jpg",
+      "SourceId": "GamesApi_",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\",
+      "BasePath": "_content/GamesApi_",
+      "RelativePath": "header.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\header.jpg"
+    }
+  ]
 }

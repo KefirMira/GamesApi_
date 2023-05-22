@@ -238,3 +238,14 @@ C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\obj\Debug\net7.0\refint\GamesA
 C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\obj\Debug\net7.0\GamesApi_.pdb
 C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\obj\Debug\net7.0\GamesApi_.genruntimeconfig.cache
 C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\obj\Debug\net7.0\ref\GamesApi_.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\GamesApi_.staticwebassets.runtime.json
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Npgsql.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Models.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Services.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Models.pdb
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Services.pdb
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\lenovo\RiderProjects\GamesApi_\GamesApi_\obj\Debug\net7.0\GamesApi_.MvcApplicationPartsAssemblyInfo.cs
