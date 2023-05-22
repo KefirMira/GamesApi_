@@ -1,0 +1,73 @@
+create table developer
+(
+    id            serial
+        primary key,
+    name          varchar(70),
+    founding_date date
+);
+
+alter table developer
+    owner to kefirmira;
+
+create table publishing_house
+(
+    id            serial
+        primary key,
+    name          varchar(70),
+    founding_date date
+);
+
+alter table publishing_house
+    owner to kefirmira;
+
+create table genre
+(
+    id   serial
+        primary key,
+    name varchar(70)
+);
+
+alter table genre
+    owner to kefirmira;
+
+create table game
+(
+    id                 serial
+        primary key,
+    name               varchar(70),
+    idpublishing_house integer
+        references publishing_house,
+    poster             varchar(200),
+    publication_date   date,
+    description        varchar(1000)
+);
+
+alter table game
+    owner to kefirmira;
+
+create table game_genres
+(
+    id      serial
+        primary key,
+    idgame  integer
+        references game,
+    idgenre integer
+        references genre
+);
+
+alter table game_genres
+    owner to kefirmira;
+
+create table game_developer
+(
+    id          serial
+        primary key,
+    iddeveloper integer
+        references developer,
+    idgame      integer
+        references game
+);
+
+alter table game_developer
+    owner to kefirmira;
+
