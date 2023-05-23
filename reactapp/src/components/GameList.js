@@ -20,7 +20,7 @@ export default class GameList extends React.Component {
                 {
                     this.state.games
                         .map(game =>
-                            <li key={game.id}>{game.name}</li>
+                            <li key={game.id}>{game.name},Дата выхода - {game.publication_date}</li>
                         )
                 }
             </ul>
