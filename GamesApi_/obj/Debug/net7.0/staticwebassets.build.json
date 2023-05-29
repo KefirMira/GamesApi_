@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "91Vx/yxE7QeYXfGO3BM79Yvfee9YV/+4t2j03pkwYpw=",
+  "Hash": "fm0XMj2a5qGBF9L4EjOhxr5TkYCh/YfG7HkDmBuP1yI=",
   "Source": "GamesApi_",
   "BasePath": "_content/GamesApi_",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\dbd.jpg",
+      "SourceId": "GamesApi_",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\",
+      "BasePath": "_content/GamesApi_",
+      "RelativePath": "dbd.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dbd.jpg"
+    },
     {
       "Identity": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\header.jpg",
       "SourceId": "GamesApi_",

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Games.GameBlank;
@@ -23,22 +24,22 @@ namespace GamesApi_.Controllers.Games
             _logger = logger;
             _gameService = gameService;
         }
-
-        [HttpGet("all")]
+       
+        [HttpGet("all"),Authorize]
         public IEnumerable<GameView> GetAll()
         {
             IEnumerable<GameDomain> gameDomains = _gameService.GetAllGame();
             return GameView.Convert(gameDomains);
         }
 
-        [HttpGet("{gameId}")]
+        [HttpGet("{gameId}"),Authorize]
         public GameView Get(int gameId)
         {
             GameDomain selectedGame = _gameService.GetGame(gameId);
             return GameView.Convert(selectedGame);
         }
 
-        [HttpPost("create")]
+        [HttpPost("create"),Authorize]
         public IActionResult Create([FromBody] GameDomain newGame)
         {
             if (_gameService.CreateGame(newGame))
@@ -47,7 +48,7 @@ namespace GamesApi_.Controllers.Games
                 return NotFound();
         }
 
-        [HttpPost("remove")]
+        [HttpPost("remove"),Authorize]
         public IActionResult Delete(int gameId)
         {
             if (_gameService.DeleteGame(gameId))
@@ -57,7 +58,7 @@ namespace GamesApi_.Controllers.Games
             
         }
 
-        [HttpPost("update")]
+        [HttpPost("update"),Authorize]
         public IActionResult Update([FromBody]GameDomain gameDomain)
         {
             if (_gameService.UpdateGame(gameDomain))
@@ -66,7 +67,7 @@ namespace GamesApi_.Controllers.Games
                 return NotFound();
             
         }
-        [HttpPost("createdevelopergame")]
+        [HttpPost("createdevelopergame"),Authorize]
         public IActionResult CreateDeveloperGame([FromBody] DeveloperToGame developer)
         {
             if (_gameService.CreateDeveloperToGame(developer))
@@ -75,7 +76,7 @@ namespace GamesApi_.Controllers.Games
                 return NotFound();
             
         }
-        [HttpPost("createganregame")]
+        [HttpPost("createganregame"),Authorize]
         public IActionResult CreateGenreGame([FromBody] GenresToGame genre)
         {
             if (_gameService.CreateGenresToGame(genre))

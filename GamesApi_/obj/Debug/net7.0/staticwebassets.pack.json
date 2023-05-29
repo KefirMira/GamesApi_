@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\dbd.jpg",
+      "PackagePath": "staticwebassets\\dbd.jpg"
+    },
+    {
       "Id": "C:\\Users\\lenovo\\RiderProjects\\GamesApi_\\GamesApi_\\wwwroot\\header.jpg",
       "PackagePath": "staticwebassets\\header.jpg"
     },

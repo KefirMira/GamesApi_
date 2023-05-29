@@ -19,6 +19,7 @@ public class GamesRepository:IGamesRepository
     }
     public IEnumerable<GameDB> GetAllGames()
     {
+        
         _connection.Open();
         NpgsqlCommand command = new NpgsqlCommand("select * from game", _connection);
         NpgsqlDataReader reader = command.ExecuteReader();
@@ -142,7 +143,7 @@ public class GamesRepository:IGamesRepository
     public IEnumerable<GenreBlank> GetGenreGame(int gameId)
     {
         _connection.Open();
-        NpgsqlCommand command = new NpgsqlCommand($"select * from game_genres join genre g on g.id = game_genres.idgenre where g.id = {gameId}", _connection);
+            NpgsqlCommand command = new NpgsqlCommand($"select * from game_genres join genre g on g.id = game_genres.idgenre where idgame = {gameId}", _connection);
         NpgsqlDataReader reader = command.ExecuteReader();
         List <GenreBlank> genres= new List<GenreBlank>();
         while (reader.Read())
