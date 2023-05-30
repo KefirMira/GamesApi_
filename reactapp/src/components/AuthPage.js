@@ -102,7 +102,7 @@ import '../index.css';
         //     </MDBContainer>
         // );
         return (
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h3>Sign In</h3>
                 <div className="mb-3">
                     <label>Email address</label>
@@ -110,6 +110,7 @@ import '../index.css';
                         type="text"
                         className="form-control"
                         placeholder="Enter email"
+                        onChange={e => setUserName(e.target.value)}
                     />
                 </div>
                 <div className="mb-3">
@@ -118,6 +119,7 @@ import '../index.css';
                         type="password"
                         className="form-control"
                         placeholder="Enter password"
+                        onChange={e => setPassword(e.target.value)}
                     />
                 </div>
                 <div className="mb-3">

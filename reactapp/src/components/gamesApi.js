@@ -13,6 +13,7 @@ class gamesApi {
 
 
     static async getGames() {
+        this.setAuthorization()
         return await axios.get("http://localhost:5044/api/Games/all")
             .then(async res => {
                 return await res.data;

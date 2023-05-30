@@ -22,7 +22,6 @@ function getToken() {
         // console.log(12);
         return JSON.parse(tokenString).jwtToken
     }
-
 }
 
 
@@ -42,7 +41,7 @@ function App() {
     const [user, setUser] = useState({loggedIn: false});
     console.log("Взял ли что-то аааааааааааааааааааа",token);
   // const [token, setToken] = useState();
-    if(token=== undefined) {
+    if(token== null) {
         console.log(1);
         return <AuthPage setToken={setToken} />
     }
