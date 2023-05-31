@@ -13,7 +13,7 @@ class gamesApi {
 
 
     static async getGames() {
-        this.setAuthorization()
+        //this.setAuthorization()
         return await axios.get("http://localhost:5044/api/Games/all")
             .then(async res => {
                 return await res.data;
@@ -32,8 +32,11 @@ class gamesApi {
                 login,
                 password,
             ),
-        }).then(async data=> {return await data.json()})
-        this.setAuthorization();
+        }).then(async data=> {
+            let result = await data.json();
+            return result;
+        })
+        //this.setAuthorization();
     }
 }
 

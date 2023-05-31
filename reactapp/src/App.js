@@ -2,14 +2,15 @@ import React, {createContext, useState} from "react";
 import axios from 'axios';
 import GameList  from './components/GameList.js';
 import AuthPage  from './components/AuthPage.js';
-import {Router, Route, Routes, Link} from "react-router-dom";
+import {Router, Route, Routes, Link, BrowserRouter} from "react-router-dom";
 import Token from "./Models/Client/Token";
 import LogInButtons from "../src/components/LoginInButtons";
 import View from "./View";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function setToken(userToken) {
-    console.log(JSON.stringify(userToken))
-    sessionStorage.setItem('token', JSON.stringify(userToken));
+    let jsonUserToken = JSON.stringify(userToken);
+    sessionStorage.setItem('token', jsonUserToken);
 }
 
 function getToken() {
@@ -39,14 +40,22 @@ export const UserContext = createContext(this);
 function App() {
     const token = getToken();
     const [user, setUser] = useState({loggedIn: false});
-    console.log("Взял ли что-то аааааааааааааааааааа",token);
+    //console.log("Взял ли что-то аааааааааааааааааааа",token);
   // const [token, setToken] = useState();
+
     if(token== null) {
         console.log(1);
         return <AuthPage setToken={setToken} />
     }
-    else{
         return (
+            /*<BrowserRouter>
+                <Routes>
+                    <Route path={'/'} element={AuthPage} />
+                    <Route element={<ProtectedRoutes />}>
+                        <Route path="/main" element={<GameList />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>*/
             // <Router >
             //     <div>
             //         <Nav />
@@ -64,8 +73,6 @@ function App() {
                 <View/>
             </UserContext.Provider>
         );
-    }
-
 }
 
 export default App;
