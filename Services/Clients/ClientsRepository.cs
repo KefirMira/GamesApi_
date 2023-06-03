@@ -76,6 +76,7 @@ public class ClientsRepository:IClientsRepository
                 client.Login = reader["login"].ToString();
                 client.Password = reader["password"].ToString();
                 client.Mail = reader["email"].ToString();
+                client.IdRole = Convert.ToInt32(reader["id_role"].ToString());
             }
             _connection.Close();
             if (client.Mail != "")
@@ -87,6 +88,29 @@ public class ClientsRepository:IClientsRepository
         {
             return false;
         }
+    }
+
+    public IEnumerable<ClientDB> GetAllClients()
+    {
+        _connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand("select * from client", _connection);
+                NpgsqlDataReader reader = command.ExecuteReader();
+                List<ClientDB> allclients = new List<ClientDB>();
+                while (reader.Read())
+                {
+                    allclients.Add(ClientDB.Convert(Convert.ToInt32(reader["id"]), new ClientBlank()
+                    {
+                        Surname = reader["surname"].ToString(),
+                        Name = reader["name"].ToString(),
+                        Patronymic = reader["patronymic"].ToString(),
+                        Login = reader["login"].ToString(),
+                        Password = reader["password"].ToString(),
+                        Mail = reader["email"].ToString(),
+                        IdRole = Convert.ToInt32(reader["id_role"].ToString())
+                    }));    
+                }
+                _connection.Close();
+                return allclients;
     }
 
     public ClientDomain GetClientTok(string login, string password)
@@ -106,6 +130,7 @@ public class ClientsRepository:IClientsRepository
                 client.Login = reader["login"].ToString();
                 client.Password = reader["password"].ToString();
                 client.Mail = reader["email"].ToString();
+                client.IdRole = Convert.ToInt32(reader["id_role"]);
             }
 
             _connection.Close();
@@ -127,6 +152,7 @@ public class ClientsRepository:IClientsRepository
                 client.Login = reader["login"].ToString();
                 client.Password = reader["password"].ToString();
                 client.Mail = reader["mail"].ToString();
+                client.IdRole = Convert.ToInt32(reader["id_role"].ToString());
             }
 
             _connection.Close();
@@ -170,6 +196,8 @@ public class ClientsRepository:IClientsRepository
             string access = CreateAccessToken(client);
             string refresh = CreateRefreshToken(client);
             var ip = GetIpAddress(context.Request.Host.Host);
+            _tokensView.IdRole = client.IdRole;
+            
             
             NpgsqlCommand command = new NpgsqlCommand($"insert into token(jwt_token, refresh_token, ip, idclient) values " +
                                                       $"('{access}','{refresh}','{ip}','{client.Id}')", _connection);
@@ -185,11 +213,24 @@ public class ClientsRepository:IClientsRepository
     }
     
    public string CreateRefreshToken(ClientDomain _client)
-    {
-        List<Claim> claims = new List<Claim> {
-            new Claim(ClaimTypes.Name, _client.Login),
-            new Claim("id", _client.Id.ToString())
-        };
+   {
+       List<Claim> claims;
+        if (_client.IdRole == 1)
+        {
+            claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, _client.Login),
+                new Claim("id", _client.Id.ToString()),
+                new Claim(ClaimTypes.Role,"Admin")
+            };
+        }
+        else
+        {
+            claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, _client.Login),
+                new Claim("id", _client.Id.ToString()),
+                new Claim(ClaimTypes.Role,"User")
+            };
+        }
         string validIssuer = "aboba";
         string validAudience = "aboba";
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysupersecret_secretkey!1234abob"));
@@ -208,10 +249,23 @@ public class ClientsRepository:IClientsRepository
     }
     public string CreateAccessToken(ClientDomain _client)
     {
-        List<Claim> claims = new List<Claim> {
-            new Claim(ClaimTypes.Name, _client.Login),
-            new Claim("id", _client.Id.ToString())
-        };
+        List<Claim> claims;
+        if (_client.IdRole == 1)
+        {
+            claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, _client.Login),
+                new Claim("id", _client.Id.ToString()),
+                new Claim(ClaimTypes.Role,"Admin")
+            };
+        }
+        else
+        {
+            claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, _client.Login),
+                new Claim("id", _client.Id.ToString()),
+                new Claim(ClaimTypes.Role,"User")
+            };
+        }
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("mysupersecret_secretkey!1234abob"));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var token = new JwtSecurityToken(
@@ -223,5 +277,49 @@ public class ClientsRepository:IClientsRepository
         var jwt = new JwtSecurityTokenHandler().WriteToken(token);
         _tokensView.JwtToken = jwt;
         return jwt;
+    }
+    
+    public TokensView RefreshToken(string token)
+    {
+        try
+        {
+            _tokensView = new TokensView();
+            ClientDomain client = GetClientByToken(token);
+            string access = CreateAccessToken(client);
+            _tokensView.IdRole = client.IdRole;
+            _tokensView.RefreshToken = token;
+            _connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand($"UPDATE token SET jwt_token = '{access}' WHERE refresh_token = '{token}'", _connection);
+            command.ExecuteNonQuery();
+            _connection.Close();
+            return _tokensView;
+        }
+        catch(Exception e )
+        {
+            throw new Exception(e.Message) ;
+        }
+    }
+//select * from client join token on client.id = token.idclient where refresh_token={}
+    public ClientDomain GetClientByToken(string token)
+    {
+        _connection.Open();
+        NpgsqlCommand command =
+            new NpgsqlCommand($"select * from client join token on client.id = token.idclient where refresh_token='{token}'", _connection);
+        NpgsqlDataReader reader = command.ExecuteReader();
+        ClientDomain client = new ClientDomain();
+        while (reader.Read())
+        {
+            client.Id = Convert.ToInt32(reader["id"]);
+            client.Surname = reader["surname"].ToString();
+            client.Name = reader["name"].ToString();
+            client.Patronymic = reader["patronymic"].ToString();
+            client.Login = reader["login"].ToString();
+            client.Password = reader["password"].ToString();
+            client.Mail = reader["email"].ToString();
+            client.IdRole = Convert.ToInt32(reader["id_role"]);
+        }
+
+        _connection.Close();
+        return client;
     }
 }

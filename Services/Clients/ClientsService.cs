@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Models.Clients;
+using Models.Games.GameDB;
 using Models.Tokens;
 
 namespace Services.Clients;
@@ -41,5 +42,20 @@ public class ClientsService:IClientsService
         return _repository.AddTokensToDB(clientDomain, context);
     }
 
-   
+    public TokensView RefreshToken(string token)
+    {
+        return _repository.RefreshToken(token);
+    }
+
+    public IEnumerable<ClientDomain> GetAllClients()
+    {
+        IEnumerable<ClientDB> allclients = _repository.GetAllClients();
+        List<ClientDomain> allinfoclients = new List<ClientDomain>();
+        foreach (var item in allclients)
+        {
+            allinfoclients.Add(ClientDomain.Convert(item));
+        }
+        
+        return allinfoclients;
+    }
 }

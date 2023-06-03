@@ -1,8 +1,9 @@
 class Token{
 
-    constructor(jwtToken,refreshToken) {
+    constructor(jwtToken,refreshToken,idRole) {
         this.jwtToken = jwtToken;
         this.refreshToken = refreshToken;
+        this.idRole = idRole;
     }
 
 }

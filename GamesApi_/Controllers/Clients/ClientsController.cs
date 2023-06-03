@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.Clients;
+using Models.Games.GameDomain;
+using Models.Games.GameView;
 using Models.Tokens;
 using Services.Clients;
 
@@ -22,7 +25,12 @@ namespace GamesApi_.Controllers.Clients
             _clientService = clientService;
         }
         
-        
+        [HttpGet("all"),Authorize]
+        public IEnumerable<ClientView> GetAll()
+        {
+            IEnumerable<ClientDomain> clientDomains = _clientService.GetAllClients();
+            return ClientView.Convert(clientDomains);
+        }
         
         [HttpPost("authorization")]
         public async Task<IActionResult> Authorization([FromBody]Auth auth)
@@ -46,6 +54,19 @@ namespace GamesApi_.Controllers.Clients
             if (_clientService.CreateClient(clientBlank))
             {
                 return Ok(new { message = "Пользователь создан" });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody]string token)
+        {
+            TokensView _token = _clientService.RefreshToken(token);
+            if (_token!=null)
+            {
+                return Ok(_token);
             }
             else
             {

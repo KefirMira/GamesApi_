@@ -9,6 +9,8 @@ public class ClientDomain
     public string Login { get; set; } 
     public string Password { get; set; } 
     public string Mail { get; set; } 
+    public int IdRole { get; set; }
+    
     public static ClientDomain Convert(ClientDB clientDB)
     {
         return new ClientDomain()
@@ -19,7 +21,8 @@ public class ClientDomain
             Patronymic = clientDB.Patronymic,
             Login = clientDB.Login,
             Password = clientDB.Password,
-            Mail = clientDB.Mail
+            Mail = clientDB.Mail,
+            IdRole = clientDB.IdRole
         };
     }
 

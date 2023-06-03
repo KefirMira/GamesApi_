@@ -9,6 +9,7 @@ public class ClientView
     public string Login { get; set; } 
     public string Password { get; set; } 
     public string Mail { get; set; } 
+    public int IdRole { get; set; }
     public static ClientView Convert(ClientDomain clientDB)
     {
         return new ClientView()
@@ -19,7 +20,8 @@ public class ClientView
             Patronymic = clientDB.Patronymic,
             Login = clientDB.Login,
             Password = clientDB.Password,
-            Mail = clientDB.Mail
+            Mail = clientDB.Mail,
+            IdRole = clientDB.IdRole
         };
     }
 

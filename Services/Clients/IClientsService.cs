@@ -10,4 +10,6 @@ public interface IClientsService
     bool GetClient(string login, string password);
     ClientDomain GetClientTok(string login, string password);
     TokensView CreateToken(ClientDomain clientDomain, HttpContext context);
+    TokensView RefreshToken(string token);
+    IEnumerable<ClientDomain> GetAllClients();
 }

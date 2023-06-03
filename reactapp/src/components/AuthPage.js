@@ -15,7 +15,8 @@ import PropTypes from "prop-types";
 //     MDBInput,
 //     MDBIcon
 // } from 'mdb-react-ui-kit';
-import '../index.css';
+//import '../index.css';
+import '../style.css';
 import {redirect} from "react-router-dom";
 
 export default function AuthPage({ setToken }) {
@@ -104,49 +105,77 @@ export default function AuthPage({ setToken }) {
     //
     //     </MDBContainer>
     // );
-    return (
-        <form onSubmit={handleSubmit}>
-            <h3>Sign In</h3>
-            <div className="mb-3">
-                <label>Email address</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter email"
-                    onChange={e => setUserName(e.target.value)}
-                />
+
+
+    //РАБОТАЕТ
+    // return (
+    //     <form onSubmit={handleSubmit}>
+    //         <h3>Sign In</h3>
+    //         <div className="mb-3">
+    //             <label>Email address</label>
+    //             <input
+    //                 type="text"
+    //                 className="form-control"
+    //                 placeholder="Enter email"
+    //                 onChange={e => setUserName(e.target.value)}
+    //             />
+    //         </div>
+    //         <div className="mb-3">
+    //             <label>Password</label>
+    //             <input
+    //                 type="password"
+    //                 className="form-control"
+    //                 placeholder="Enter password"
+    //                 onChange={e => setPassword(e.target.value)}
+    //             />
+    //         </div>
+    //         <div className="mb-3">
+    //             <div className="custom-control custom-checkbox">
+    //                 <input
+    //                     type="checkbox"
+    //                     className="custom-control-input"
+    //                     id="customCheck1"
+    //                 />
+    //                 <label className="custom-control-label" htmlFor="customCheck1">
+    //                     Remember me
+    //                 </label>
+    //             </div>
+    //         </div>
+    //         <div className="d-grid">
+    //             <button type="submit" className="btn btn-primary">
+    //                 Submit
+    //             </button>
+    //         </div>
+    //         <p className="forgot-password text-right">
+    //             Forgot <a href="#">password?</a>
+    //         </p>
+    //     </form>
+    // )
+
+
+    //ломает навигацию
+    return(
+        <div className="body-huita" onSubmit={handleSubmit}>
+        <section className='login' >
+            <div className='head'>
+                <h1 className='company'>Universe Explorer</h1>
             </div>
-            <div className="mb-3">
-                <label>Password</label>
-                <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter password"
-                    onChange={e => setPassword(e.target.value)}
-                />
+            <p className='msg'>Welcome back</p>
+            <div className='form'>
+                <form>
+                    <input type="text"  className='input-login' required
+                           onChange={e => setUserName(e.target.value)}></input>
+                        <input type="password" className='input-password'
+                               onChange={e => setPassword(e.target.value)}></input>
+                            <button  className='btn-login' >Login</button>
+                            <a href="#" className='forgot'>Forgot?</a>
+                </form>
             </div>
-            <div className="mb-3">
-                <div className="custom-control custom-checkbox">
-                    <input
-                        type="checkbox"
-                        className="custom-control-input"
-                        id="customCheck1"
-                    />
-                    <label className="custom-control-label" htmlFor="customCheck1">
-                        Remember me
-                    </label>
-                </div>
-            </div>
-            <div className="d-grid">
-                <button type="submit" className="btn btn-primary">
-                    Submit
-                </button>
-            </div>
-            <p className="forgot-password text-right">
-                Forgot <a href="#">password?</a>
-            </p>
-        </form>
-    )
+        </section>
+
+        </div>
+)
+
 }
 
 AuthPage.propTypes = {

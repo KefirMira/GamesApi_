@@ -9,6 +9,7 @@ public class ClientDB
     public string Login { get;private set; } 
     public string Password { get;private set; } 
     public string Mail { get;private set; } 
+    public int IdRole { get; set; }
     public static ClientDB Convert(ClientBlank clientBlank)
     {
         return new ClientDB()
@@ -18,7 +19,8 @@ public class ClientDB
             Patronymic = clientBlank.Patronymic,
             Login = clientBlank.Login,
             Password = clientBlank.Password,
-            Mail = clientBlank.Mail
+            Mail = clientBlank.Mail,
+            IdRole = clientBlank.IdRole
         };
     }
     public static ClientDB Convert(int clientId,ClientBlank clientBlank)
@@ -30,7 +32,8 @@ public class ClientDB
             Patronymic = clientBlank.Patronymic,
             Login = clientBlank.Login,
             Password = clientBlank.Password,
-            Mail = clientBlank.Mail
+            Mail = clientBlank.Mail,
+            IdRole = clientBlank.IdRole
         };
     }
 }
