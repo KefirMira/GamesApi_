@@ -32,6 +32,8 @@ export default function AuthPage({ setToken }) {
             });
             //console.log(token);
             setToken(token);
+
+
             //redirect('/main')
             window.location.replace('http://localhost:3000/main');
         } catch {

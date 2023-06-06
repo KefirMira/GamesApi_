@@ -4,10 +4,10 @@ public class GameDB
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public string Poster { get; set; }
+    public string? Poster { get; set; }
     public string Description { get; set; }
-    public DateOnly PublicationDate { get; set; }
-    public int IdPublisherHouse { get; set; }
+    public DateTime PublicationDate { get; set; }
+    public int? IdPublisherHouse { get; set; }
     
     public static GameDB Convert(GameBlank.GameBlank gameBlank)
     {

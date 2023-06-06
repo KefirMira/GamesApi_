@@ -32,7 +32,7 @@ export default class GameList extends React.Component {
                     this.state.games
                         .map(game =>
                             <div>
-                                <button onClick={e=>this.navigateTo(e, "game.id")} value={game.id} type="button" >
+                                <button onClick={e=>this.navigateTo(e, "game.name")} value={game.id} type="button" >
                                     <li key={game.id} >{game.name}</li>
                                 </button>
                                  <li key={game.id} ><img width={400} height={300} src={"http://localhost:5044/"+game.poster}/><br/>

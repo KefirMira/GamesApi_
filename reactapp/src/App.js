@@ -9,6 +9,7 @@ import Token from "./Models/Client/Token";
 import LogInButtons from "../src/components/LoginInButtons";
 import View from "./View";
 import ProtectedRoutes from "./ProtectedRoutes";
+import CreatePage from "./components/CreatePage";
 
 function setToken(userToken) {
     let jsonUserToken = JSON.stringify(userToken);
@@ -69,6 +70,7 @@ function App() {
                         <Link className="Navbar-item" to="/">Авторизация</Link>
                         <Link className="Navbar-item" to="/main">Главная</Link>
                         <Link className="Navbar-item" to="/client">Клиенты</Link>
+                        <Link className="Navbar-item" to="/create">Создать игру</Link>
                     </nav>
                     <Routes>
                         <Route path={'/'} element={<AuthPage setToken={setToken}/>} />
@@ -77,6 +79,9 @@ function App() {
                         </Route>
                         <Route >
                             <Route path="/client" element={<ClientPage />} />
+                        </Route>
+                        <Route >
+                            <Route path="/create" element={<CreatePage />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>

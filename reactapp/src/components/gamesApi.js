@@ -5,9 +5,12 @@ class gamesApi {
     static setAuthorization() {
 
         if(sessionStorage.getItem('token') == null){
+            return false;
         }
         else{
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse( sessionStorage.getItem('token')).jwtToken;
+            let beb = 'Bearer ' + JSON.parse( sessionStorage.getItem('token')).jwtToken;
+            axios.defaults.headers.common['Authorization'] = beb;
+            return true;
         }
     }
 
@@ -110,6 +113,31 @@ class gamesApi {
         })
         this.setAuthorization();
     }
+
+
+    static async createGame(name,date,description){
+        //auth.preventDefault()
+        this.setAuthorization();
+        let content =JSON.stringify(name,date,description);
+        console.log(JSON.stringify(name,date,description))
+        if(this.setAuthorization()){
+            return fetch(`http://localhost:5044/api/Games/create`, {
+                method: 'POST',
+                headers: {
+                    Authorization: 'Bearer '+ JSON.parse( sessionStorage.getItem('token')).jwtToken,
+                    Accept: 'application/json',
+                    "Content-Type": "application/json",
+                },
+                body: content,
+            }).then(async data=> {
+                let result = await data.body;
+                return result
+            })
+        }
+
+    }
+
+
 }
 
 export default gamesApi

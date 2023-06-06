@@ -29,7 +29,7 @@ public class GamesRepository:IGamesRepository
             allgames.Add(GameDB.Convert(Convert.ToInt32(reader["id"]), new GameBlank()
             {
                 Name = reader["name"].ToString(),
-                PublicationDate = DateOnly.FromDateTime(Convert.ToDateTime(reader["publication_date"])),
+                PublicationDate = (Convert.ToDateTime(reader["publication_date"])),
                 Description = reader["description"].ToString(),
                 Poster = reader["poster"].ToString()
             }));    
@@ -47,7 +47,7 @@ public class GamesRepository:IGamesRepository
         while (reader.Read())
         {
             game.Name = reader["name"].ToString();
-            game.PublicationDate = DateOnly.FromDateTime(Convert.ToDateTime(reader["publication_date"]));
+            game.PublicationDate = (Convert.ToDateTime(reader["publication_date"]));
             game.Description = reader["description"].ToString();
             game.Poster = reader["poster"].ToString();
         }
@@ -60,14 +60,29 @@ public class GamesRepository:IGamesRepository
         try
         {
             _connection.Open();
-            NpgsqlCommand command = new NpgsqlCommand(
-                $"insert into game( name, idpublishing_house, poster, publication_date, description) values " +
-                $"({gameDomain.Name},{gameDomain.IdPublishingHouse},{gameDomain.Poster},{gameDomain.Poster},'{gameDomain.PublicationDate}'," +
-                $"{gameDomain.Description})",
-                _connection);
-            command.ExecuteNonQuery();
-            _connection.Close();
-            return true;
+            if (gameDomain.PublishingHouseBlank == null)
+            {
+                NpgsqlCommand command = new NpgsqlCommand(
+                    $"insert into game( name,  publication_date, description) values " +
+                    $"('{gameDomain.Name}','{gameDomain.PublicationDate}'," +
+                    $"'{gameDomain.Description}')",
+                    _connection);
+                command.ExecuteNonQuery();
+                _connection.Close();
+                return true;   
+            }
+            else
+            {
+                 NpgsqlCommand command = new NpgsqlCommand(
+                     $"insert into game( name, idpublishing_house, poster, publication_date, description) values " +
+                     $"({gameDomain.Name},{gameDomain.IdPublishingHouse},{gameDomain.Poster},'{gameDomain.PublicationDate}'," +
+                     $"{gameDomain.Description})",
+                     _connection);
+                 command.ExecuteNonQuery();
+                 _connection.Close();
+                 return true;
+            }
+           
         }
         catch
         {
