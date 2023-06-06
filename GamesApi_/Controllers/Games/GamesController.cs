@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models.Games.GameBlank;
 using Models.Games.GameDomain;
 using Models.Games.GameView;
+using Models.PublishingHouse.PublishingHouseDomain;
 using Services.Games;
 
 namespace GamesApi_.Controllers.Games
@@ -32,6 +33,13 @@ namespace GamesApi_.Controllers.Games
             return GameView.Convert(gameDomains);
         }
 
+        [HttpGet("allPublishers")]
+        public IEnumerable<PublishingHouseDomain> GetAllPublishers()
+        {
+            IEnumerable<PublishingHouseDomain> publishingHouseDomains = _gameService.GetAllPublishers();
+            return publishingHouseDomains;
+        }
+        
         [HttpGet("{gameId}"),Authorize]
         public GameView Get(int gameId)
         {

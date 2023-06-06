@@ -4,6 +4,7 @@ using Models.Games.GameDB;
 using Models.Games.GameDomain;
 using Models.Genres.GenreBlank;
 using Models.PublishingHouse.PublishingHouseBlank;
+using Models.PublishingHouse.PublishingHouseDomain;
 using Npgsql;
 
 namespace Services.Games;
@@ -191,6 +192,21 @@ public class GamesRepository:IGamesRepository
         while (reader.Read())
         {
              publishingHouse =  new PublishingHouseBlank(){ Name = reader["name"].ToString(), FoundingDate = DateOnly.FromDateTime(Convert.ToDateTime(reader["founding_date"]))} ;
+        }
+        _connection.Close();
+        return publishingHouse;
+    }
+
+    public List<PublishingHouseDomain> GetAllPublishers()
+    {
+        _connection.Open();
+        NpgsqlCommand command = new NpgsqlCommand($"select * from publishing_house ", _connection);
+        NpgsqlDataReader reader = command.ExecuteReader();
+        List<PublishingHouseDomain> publishingHouse= new List<PublishingHouseDomain>();
+        while (reader.Read())
+        {
+            PublishingHouseDomain pub =  new PublishingHouseDomain(){ Id = Convert.ToInt32(reader["id"].ToString()),Name = reader["name"].ToString(), FoundingDate = DateOnly.FromDateTime(Convert.ToDateTime(reader["founding_date"]))} ;
+            publishingHouse.Add(pub); 
         }
         _connection.Close();
         return publishingHouse;

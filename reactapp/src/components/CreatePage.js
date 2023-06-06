@@ -7,14 +7,18 @@ import Auth from "../Models/Client/Auth";
 import PropTypes from "prop-types";
 import '../style.css';
 //import Select from 'react-select'
+import Select from 'react-select'
+import async from "async";
 
 
-export default function CreatePage() {
+export   default async  function CreatePage() {
 
     const [name, setName] = useState();
     //const [poster, setPoster] = useState();
     const [publishing_date, setPublishindDate] = useState();
     const [description, setDescription] = useState();
+    const [publisher, setPublisher] = useState();
+    const [publishers, setPublishers] = useState();
     const handleSubmit = async e => {
         e.preventDefault();
         try {
@@ -34,6 +38,20 @@ export default function CreatePage() {
 
     }
 
+setPublishers(await gamesApi.getPublishers)
+
+    // const options = [
+    //      publishers
+    //         .map(publisher =>
+    //             <li key={game.id} >{game.name}</li>)
+    // ]
+
+    // const MyComponent = () => (
+    //     <Select  options={publishers}
+    //              getOptionLabel={(option) => option.name}
+    //              getOptionValue={(option) => option.name} />
+    // )
+
 
     //ломает навигацию
     return(
@@ -41,6 +59,9 @@ export default function CreatePage() {
                 <p >Введите данные</p>
                 <div >
                     <form>
+                        <Select  options={publishers}
+                                 getOptionLabel={(option) => option.name}
+                                 getOptionValue={(option) => option.name} />
                         <input type="text"   required
                                onChange={e => setName(e.target.value)}></input>
                         <input type="datetime-local"   required

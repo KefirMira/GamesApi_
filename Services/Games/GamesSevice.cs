@@ -5,6 +5,7 @@ using Models.Games.GameDB;
 using Models.Games.GameDomain;
 using Models.Genres.GenreBlank;
 using Models.PublishingHouse.PublishingHouseBlank;
+using Models.PublishingHouse.PublishingHouseDomain;
 
 namespace Services.Games;
 
@@ -73,6 +74,15 @@ public class GamesSevice:IGamesService
             allinfogame.Add(GameDomain.Convert(item, genresBlanks,developerBlanks, publishingHouse));
         }
         return allinfogame;
+    }
+
+    public IEnumerable<PublishingHouseDomain> GetAllPublishers()
+    {
+        List<PublishingHouseDomain> publishingHouseDomains = _repository.GetAllPublishers();
+        if (publishingHouseDomains!=null)
+            return publishingHouseDomains;
+        else
+            return publishingHouseDomains;
     }
 
     public bool CreateDeveloperToGame(DeveloperToGame devToGame)

@@ -138,6 +138,25 @@ class gamesApi {
     }
 
 
+    //издатели
+    static async getPublishers() {
+        this.setAuthorization()
+        return await axios.get("http://localhost:5044/api/Games/allPublishers")
+            .then(async res => {
+                if(res.status===200)
+                    return await res.data;
+                if(res.status===401){
+                    await this.refreshToken()
+                    this.setAuthorization()
+                    axios.get("http://localhost:5044/api/Games/allPublishers")
+                        .then(async res => {
+                            if(res.status===200)
+                                return await res.data;})
+                }
+            })
+    }
+
+
 }
 
 export default gamesApi
